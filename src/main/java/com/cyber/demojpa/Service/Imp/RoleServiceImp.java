@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class RoleServiceImp implements RoleService {
     @Autowired
@@ -28,7 +30,7 @@ public class RoleServiceImp implements RoleService {
         }
 //        System.out.println(list);
 
-       return dtoList;
+        return dtoList;
     }
 
     @Override
@@ -46,5 +48,48 @@ public class RoleServiceImp implements RoleService {
         }
 
         return dtoList;
+    }
+
+    @Override
+    public boolean insertRole(RoleDTO roleDTO) {
+        Roles roles = new Roles();
+        roles.setName(roleDTO.getName());
+        roles.setDesc(roleDTO.getDesc());
+
+        try {
+            roleRepository.save(roles);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Lỗi add roles: " + e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateRole(RoleDTO roleDTO, int id) {
+        Optional<Roles> rolesOptional = roleRepository.findById(id);
+
+        try {
+            Roles roles = rolesOptional.get();
+            roles.setName(roleDTO.getName());
+            roles.setDesc(roleDTO.getDesc());
+
+            roleRepository.save(roles);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Lỗi update roles: " + e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteRole(int id) {
+        try {
+            roleRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Lỗi delete roles: " + e.getMessage());
+            return false;
+        }
     }
 }

@@ -1,5 +1,9 @@
 package com.cyber.demojpa.dto;
 
+import com.cyber.demojpa.entity.Roles;
+
+import javax.management.relation.Role;
+
 public class UserDTO {
 
     private String email;
@@ -8,8 +12,11 @@ public class UserDTO {
     private String avatar;
     private int roleId;
 
+
     public UserDTO() {
     }
+
+
 
     public UserDTO(String email, String password, String fullName, String avatar, int roleId) {
         this.email = email;

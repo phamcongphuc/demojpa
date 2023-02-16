@@ -7,6 +7,13 @@ import java.util.List;
 
 @Service
 public interface RoleService {
-     List<RoleDTO> getAllRole();
-     List<RoleDTO> getRoleByName(String name);
+    List<RoleDTO> getAllRole();
+
+    List<RoleDTO> getRoleByName(String name);
+
+    boolean insertRole(RoleDTO roleDTO);
+
+    boolean updateRole(RoleDTO roleDTO, int id);
+
+    boolean deleteRole(int id);
 }
